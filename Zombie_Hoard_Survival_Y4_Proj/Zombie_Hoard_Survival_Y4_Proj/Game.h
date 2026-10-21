@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "Level.h"
 
 enum class GameState
 {
@@ -21,4 +22,6 @@ private:
 
 	Camera2D m_camera{};
 	GameState m_state = GameState::Playing;
+
+	Level m_level;
 };
