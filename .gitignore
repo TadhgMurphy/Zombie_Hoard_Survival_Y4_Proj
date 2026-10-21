@@ -1,3 +1,25 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.vcxproj.user
+*.ipch
+*.VC.db
+*.VC.db-shm
+*.VC.db-wal
+*.VC.opendb
+
+# Build output
+x64/
+Debug/
+Release/
+*.obj
+*.tlog
+*.idb
+*.pdb
+*.ilk
+*.log
+
 # Prerequisites
 *.d
 
