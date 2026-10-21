@@ -1,6 +1,8 @@
 #pragma once
 #include "raylib.h"
 #include "Level.h"
+#include "Player.h"
+#include <iostream>
 
 enum class GameState
 {
@@ -24,4 +26,5 @@ private:
 	GameState m_state = GameState::Playing;
 
 	Level m_level;
+	Player m_player;
 };
