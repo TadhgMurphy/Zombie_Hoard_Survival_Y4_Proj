@@ -18,6 +18,7 @@ public:
 private:
 	void Update(float dt);
 	void Render();
+	void UpdateCamera();
 
 	static constexpr int window_w = 1280;
 	static constexpr int window_h = 720;

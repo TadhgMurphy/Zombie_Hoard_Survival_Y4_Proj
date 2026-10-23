@@ -8,9 +8,10 @@ Game::Game()
 
 	m_camera.offset = { window_w / 2.0f, window_h / 2.0f };
 
-	Rectangle b = m_level.GetBounds();
+	//Rectangle b = m_level.GetBounds();
 	//m_camera.target = { b.x + b.width / 2.0f, b.y + b.height / 2.0f };
-	m_camera.target = m_player.GetPosition();
+	//m_camera.target = m_player.GetPosition();
+	UpdateCamera();
 	m_camera.rotation = 0.0f;
 	m_camera.zoom = 1.0f;
 }
@@ -58,4 +59,17 @@ void Game::Render()
 
 	DrawFPS(10, 10);
 	EndDrawing();
+}
+
+void Game::UpdateCamera()
+{
+	Rectangle b = m_level.GetBounds();
+	Vector2 p = m_player.GetPosition();
+
+	float halfW = window_w / 2.0f / m_camera.zoom;
+	float halfH = window_h / 2.0f / m_camera.zoom;
+
+	p.x = Clamp(p.x, b.x + halfW, b.x + b.width - halfW);
+	p.y = Clamp(p.y, b.y + halfH, b.y + b.height - halfH);
+	m_camera.target = p;
 }
