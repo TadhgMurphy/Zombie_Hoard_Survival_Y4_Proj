@@ -30,11 +30,16 @@ void Player::Update(float dt, Rectangle levelBounds, Vector2 mouseWorldPos)
 
 	m_aimAngle = std::atan2(mouseWorldPos.y - m_pos.y, mouseWorldPos.x - m_pos.x) * RAD2DEG;
 
+	const float barrelLength = 30.0f;
+	float rad = m_aimAngle * DEG2RAD;
+	Vector2 muzzle{ m_pos.x + std::cos(rad) * barrelLength, m_pos.y + std::sin(rad) * barrelLength };
 
+	m_weapon.Update(dt, muzzle, m_aimAngle, IsMouseButtonDown(MOUSE_LEFT_BUTTON), levelBounds);
 }
 
 void Player::Draw() const
 {
+	m_weapon.Draw();
 	DrawRectanglePro({ m_pos.x, m_pos.y, 30.0f, 8.0f }, { 0.0f, 4.0f }, m_aimAngle, LIGHTGRAY);
 	DrawCircleV(m_pos, m_radius, Color{ 70,130,200,255 });
 }
