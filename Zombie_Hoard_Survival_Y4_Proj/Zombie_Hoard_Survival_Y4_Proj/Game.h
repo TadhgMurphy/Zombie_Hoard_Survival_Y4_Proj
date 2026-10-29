@@ -2,6 +2,8 @@
 #include "raylib.h"
 #include "Level.h"
 #include "Player.h"
+#include "Zombie.h"
+#include <vector>
 #include <iostream>
 
 enum class GameState
@@ -28,4 +30,5 @@ private:
 
 	Level m_level;
 	Player m_player;
+	std::vector<Zombie> m_zombies;
 };

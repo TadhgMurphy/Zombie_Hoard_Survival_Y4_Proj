@@ -8,12 +8,13 @@ Game::Game()
 
 	m_camera.offset = { window_w / 2.0f, window_h / 2.0f };
 
-	//Rectangle b = m_level.GetBounds();
-	//m_camera.target = { b.x + b.width / 2.0f, b.y + b.height / 2.0f };
-	//m_camera.target = m_player.GetPosition();
 	UpdateCamera();
 	m_camera.rotation = 0.0f;
 	m_camera.zoom = 1.0f;
+
+	m_zombies.emplace_back(Vector2{ 100.0f, 100.0f });
+	m_zombies.emplace_back(Vector2{ 1900.0f, 100.0f });
+	m_zombies.emplace_back(Vector2{ 1000.0f, 1400.0f });
 }
 
 Game::~Game()
@@ -42,6 +43,10 @@ void Game::Update(float dt)
 	case GameState::Playing:
 		Vector2 mouseWorld = GetScreenToWorld2D(GetMousePosition(), m_camera);
 		m_player.Update(dt, m_level.GetBounds(), mouseWorld);
+
+		for (Zombie& z : m_zombies)
+			z.Update(dt, m_player.GetPosition());
+
 		m_camera.target = m_player.GetPosition();
 		break;
 	}
@@ -54,6 +59,10 @@ void Game::Render()
 
 	BeginMode2D(m_camera);
 	m_level.Draw();
+
+	for (const Zombie& z : m_zombies)
+		z.Draw();
+
 	m_player.Draw();
 	EndMode2D();
 
